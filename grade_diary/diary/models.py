@@ -12,8 +12,6 @@ class Teacher(models.Model):
 
 class Subject(models.Model):
     subject = models.CharField(max_length=100, verbose_name='Предмет')
-    student = models.ForeignKey('Student', on_delete=models.SET_NULL, null=True, verbose_name='Ученик', related_name='subject')
-    grade = models.ForeignKey('Grade', on_delete=models.SET_NULL, null=True, verbose_name='Оценка', related_name='grade')
 
     def __str__(self):
         return self.subject
@@ -38,8 +36,8 @@ class Student(models.Model):
         return f"{self.surname} {self.name}, класс {self.group}"
 
 
-class Grade(models.Model):
-    mark = models.IntegerField(default=1, verbose_name='Оценка')
-
-    def __str__(self):
-        return self.mark
+class GradeTable(models.Model):
+    subject = models.ForeignKey('Subject', on_delete=models.SET_NULL, null=True, verbose_name='Предмет', related_name='table')
+    group = models.ForeignKey('Group', on_delete=models.SET_NULL, null=True, verbose_name='Класс', related_name='student')
+    student = models.ForeignKey('Student', on_delete=models.SET_NULL, null=True, verbose_name='Ученик', related_name='table')
+    grade = models.IntegerField(default=1, verbose_name='Оценка')

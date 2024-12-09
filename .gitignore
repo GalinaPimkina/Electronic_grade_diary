@@ -1,2 +1,3 @@
 /venv/
 /.idea/
+/grade_diary/db.sqlite3
