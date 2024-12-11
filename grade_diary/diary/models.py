@@ -6,6 +6,7 @@ class Teacher(models.Model):
 
     name = models.CharField(max_length=100, verbose_name='ФИО преподавателя')
     subject = models.ForeignKey('Subject', on_delete=models.SET_NULL, null=True, verbose_name='Предмет', related_name='teacher')
+    start_work_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата трудоустройства')
 
     def __str__(self):
         return f"{self.name}, предмет - {self.subject}"
