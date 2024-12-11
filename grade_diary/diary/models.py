@@ -2,12 +2,11 @@ from django.db import models
 
 
 class Teacher(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Имя')
-    surname = models.CharField(max_length=100, verbose_name='Фамилия')
+    name = models.CharField(max_length=100, verbose_name='ФИО преподавателя')
     subject = models.ForeignKey('Subject', on_delete=models.SET_NULL, null=True, verbose_name='Предмет', related_name='teacher')
 
     def __str__(self):
-        return f"{self.surname} {self.name}, предмет - {self.subject}"
+        return f"{self.name}, предмет - {self.subject}"
 
 
 class Subject(models.Model):
@@ -26,18 +25,14 @@ class Group(models.Model):
 
 
 class Student(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Имя')
-    surname = models.CharField(max_length=100, verbose_name='Фамилия')
+    name = models.CharField(max_length=100, verbose_name='ФИО учащегося')
     age = models.IntegerField(default=0, verbose_name='Возраст учащегося')
-    start_study_date = models.IntegerField(default=0, verbose_name='Дата начала обучения')
+    start_study_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата поступления')
     group = models.ForeignKey('Group', on_delete=models.SET_NULL, null=True, verbose_name='Класс', related_name='student')
 
     def __str__(self):
-        return f"{self.surname} {self.name}, класс {self.group}"
+        return f"{self.name}, класс - {self.group}"
 
 
-class GradeTable(models.Model):
-    subject = models.ForeignKey('Subject', on_delete=models.SET_NULL, null=True, verbose_name='Предмет', related_name='table')
-    group = models.ForeignKey('Group', on_delete=models.SET_NULL, null=True, verbose_name='Класс', related_name='student')
-    student = models.ForeignKey('Student', on_delete=models.SET_NULL, null=True, verbose_name='Ученик', related_name='table')
+class Grade(models.Model):
     grade = models.IntegerField(default=1, verbose_name='Оценка')
