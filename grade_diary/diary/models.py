@@ -2,6 +2,8 @@ from django.db import models
 
 
 class Teacher(models.Model):
+    '''учителя'''
+
     name = models.CharField(max_length=100, verbose_name='ФИО преподавателя')
     subject = models.ForeignKey('Subject', on_delete=models.SET_NULL, null=True, verbose_name='Предмет', related_name='teacher')
 
@@ -10,6 +12,8 @@ class Teacher(models.Model):
 
 
 class Subject(models.Model):
+    '''предметы'''
+
     subject = models.CharField(max_length=100, verbose_name='Предмет')
 
     def __str__(self):
@@ -17,6 +21,8 @@ class Subject(models.Model):
 
 
 class Group(models.Model):
+    '''классы'''
+
     group_number = models.CharField(max_length=10, verbose_name='Номер группы')
     group_teacher = models.ForeignKey('Teacher', on_delete=models.SET_NULL, null=True, verbose_name='Классный руководитель', related_name='group')
 
@@ -25,6 +31,8 @@ class Group(models.Model):
 
 
 class Student(models.Model):
+    '''учащиеся'''
+
     name = models.CharField(max_length=100, verbose_name='ФИО учащегося')
     age = models.IntegerField(default=0, verbose_name='Возраст учащегося')
     start_study_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата поступления')
@@ -35,4 +43,9 @@ class Student(models.Model):
 
 
 class Grade(models.Model):
+    '''оценки'''
+
     grade = models.IntegerField(default=1, verbose_name='Оценка')
+
+    def __str__(self):
+        return self.grade
