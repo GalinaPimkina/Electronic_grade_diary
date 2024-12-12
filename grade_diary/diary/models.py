@@ -28,7 +28,7 @@ class Group(models.Model):
     group_teacher = models.ForeignKey('Teacher', on_delete=models.SET_NULL, null=True, verbose_name='Классный руководитель', related_name='group')
 
     def __str__(self):
-        return self.group_number
+        return f"{self.group_number}, классный руководитель - {self.group_teacher}"
 
 
 class Student(models.Model):
@@ -47,6 +47,8 @@ class Grade(models.Model):
     '''оценки'''
 
     grade = models.IntegerField(default=1, verbose_name='Оценка')
+    subject = models.ForeignKey('Subject', on_delete=models.SET_NULL, null=True, verbose_name='Предмет', related_name='grade')
+    student = models.ForeignKey('Student', on_delete=models.CASCADE, verbose_name='Учащийся', related_name='student')
 
     def __str__(self):
         return self.grade
