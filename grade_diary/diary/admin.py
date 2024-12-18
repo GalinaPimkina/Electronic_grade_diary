@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Subject, Student, Grade
+from .models import Subject, StudyGroup, User
 
 
 @admin.register(Subject)
@@ -9,15 +9,15 @@ class SubjectAdmin(admin.ModelAdmin):
     ordering = ['subject']
 
 
-@admin.register(Student)
-class StudentAdmin(admin.ModelAdmin):
-    list_display = ['name']
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    list_display = ['name', 'subject', 'teacher']
     list_display_links = ['name']
-    ordering = ['name']
+    ordering = ['name', 'subject']
 
 
-@admin.register(Grade)
-class GradeAdmin(admin.ModelAdmin):
-    list_display = ['grade']
-    list_display_links = ['grade']
-    ordering = ['grade']
+@admin.register(StudyGroup)
+class StudyGroupAdmin(admin.ModelAdmin):
+    list_display = ['number']
+    list_display_links = ['number']
+    ordering = ['number']
