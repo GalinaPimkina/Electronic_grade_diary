@@ -1,4 +1,6 @@
 from django.contrib import admin
+
+from .forms import UserCreationForm
 from .models import Subject, StudyGroup, User
 
 
@@ -14,6 +16,7 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ['name', 'subject', 'teacher']
     list_display_links = ['name']
     ordering = ['name', 'subject']
+    form = UserCreationForm
 
 
 @admin.register(StudyGroup)

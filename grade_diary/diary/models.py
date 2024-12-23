@@ -15,7 +15,7 @@ class User(AbstractUser):
 
     name = models.CharField(max_length=100, verbose_name='ФИО')
     subject = models.ForeignKey(Subject, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Предмет', related_name='teacher')
-    born_date = models.DateTimeField(null=True, verbose_name='Дата рождения')
+    born_date = models.DateField(null=True, verbose_name='Дата рождения')
     teacher = models.BooleanField(default=False, verbose_name='Преподаватель')
 
     def __str__(self):
