@@ -13,11 +13,12 @@ class SubjectAdmin(admin.ModelAdmin):
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ['name', 'subject', 'teacher']
+    list_display = ['name', 'subject', 'teacher', 'username']
     list_display_links = ['name']
     ordering = ['name', 'subject']
     form = UserRegisterForm
     filter_horizontal = ['user_permissions', 'groups']
+
 
 
 @admin.register(StudyGroup)
