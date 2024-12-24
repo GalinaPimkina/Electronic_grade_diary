@@ -17,6 +17,7 @@ class UserAdmin(admin.ModelAdmin):
     list_display_links = ['name']
     ordering = ['name', 'subject']
     form = UserRegisterForm
+    filter_horizontal = ['user_permissions', 'groups']
 
 
 @admin.register(StudyGroup)
@@ -24,3 +25,4 @@ class StudyGroupAdmin(admin.ModelAdmin):
     list_display = ['number']
     list_display_links = ['number']
     ordering = ['number']
+    filter_horizontal = ['students']
